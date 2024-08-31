@@ -120,6 +120,10 @@ dependencies {
     implementation(libs.androidx.activity.ktx)
 ////to use viewModel with fragment
     implementation(libs.androidx.fragment.ktx)
+
+    //okhttp client and gson
+    implementation(libs.okhttp)
+    implementation(libs.gson)
 }
 
 

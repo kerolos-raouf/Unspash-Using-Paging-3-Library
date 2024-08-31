@@ -124,6 +124,10 @@ dependencies {
     //okhttp client and gson
     implementation(libs.okhttp)
     implementation(libs.gson)
+
+    ///Kotlin Coroutines Dependency
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.androidx.lifecycle.livedata.ktx.v270)//////lifeData with flow
 }
 
 

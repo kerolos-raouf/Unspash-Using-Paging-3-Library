@@ -11,7 +11,7 @@ import com.example.testpaging3library.data.model.UnsplashImage
 interface UnsplashImageDao {
 
     @Query("SELECT * FROM unsplashimage")
-    suspend fun getAllImages() : PagingSource<Int, UnsplashImage>
+    fun getAllImages() : PagingSource<Int, UnsplashImage>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertImages(images : List<UnsplashImage>)

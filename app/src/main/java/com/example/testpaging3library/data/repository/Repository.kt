@@ -34,6 +34,8 @@ class Repository @Inject constructor(
         ).flow
     }
 
+    fun getString() = "this is data from repository"
+
 
 
 }

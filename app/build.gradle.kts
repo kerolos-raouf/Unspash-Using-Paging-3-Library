@@ -58,7 +58,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
-        viewBinding = true
+        dataBinding = true
         buildConfig = true
     }
 }
@@ -79,6 +79,7 @@ dependencies {
     /////dagger hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+    kapt(libs.androidx.hilt.compiler)
 
 
     ///navigation
@@ -97,11 +98,14 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
 
     ///room database
+    val room_version = "2.6.1"
     implementation(libs.androidx.room.runtime)
     annotationProcessor(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.paging)
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$room_version")
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
 
     ///glide dependency for images
     implementation(libs.glide)

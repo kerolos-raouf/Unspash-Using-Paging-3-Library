@@ -47,7 +47,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:background="#80000000"
-                    android:padding="10dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
                     android:text="This photo was taken by kerolos"
                     android:textColor="@color/white"
                     android:textSize="15sp"
@@ -63,6 +66,7 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:padding="5dp"
+                    android:layout_marginEnd="15dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class User(
-    val userName : String,
+    val username : String = "Kerolos",
     @Embedded
     val links : UserLinks
 )

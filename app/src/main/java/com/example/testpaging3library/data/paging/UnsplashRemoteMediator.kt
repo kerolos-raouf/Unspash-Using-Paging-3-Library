@@ -1,5 +1,6 @@
 package com.example.testpaging3library.data.paging
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -25,11 +26,13 @@ class UnsplashRemoteMediator @Inject constructor(
              {
                  LoadType.REFRESH ->
                  {
+                     Log.d("Kerolos", "load: refresh")
                      val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
                      remoteKeys?.nextPage?.minus(1) ?: 1
                  }
                  LoadType.PREPEND ->
                  {
+                     Log.d("Kerolos", "load: prepend")
                      val remoteKeys = getRemoteKeyForFirstItem(state)
                      val prevPage = remoteKeys?.prevPage
                          ?: return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
@@ -37,6 +40,7 @@ class UnsplashRemoteMediator @Inject constructor(
                  }
                  LoadType.APPEND ->
                  {
+                     Log.d("Kerolos", "load: append")
                      val remoteKeys = getRemoteKeyForLastItem(state)
                      val nextPage = remoteKeys?.nextPage
                          ?: return MediatorResult.Success(endOfPaginationReached = remoteKeys != null)
@@ -45,6 +49,7 @@ class UnsplashRemoteMediator @Inject constructor(
              }
 
              val response  = unsplashApi.getAllImages(currentPage,10)
+
              val endOfPaginationReached = response.isEmpty()
 
              val prevPage = if(currentPage == 1)  null else currentPage - 1
@@ -74,6 +79,7 @@ class UnsplashRemoteMediator @Inject constructor(
              MediatorResult.Success(endOfPaginationReached)
          }catch (e : Exception)
          {
+             Log.d("Kerolos", "load: ${e.message}")
              MediatorResult.Error(e)
          }
     }

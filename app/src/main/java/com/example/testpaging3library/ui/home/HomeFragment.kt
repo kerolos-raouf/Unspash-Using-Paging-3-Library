@@ -9,11 +9,15 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.ExperimentalPagingApi
+import androidx.paging.map
 import com.example.testpaging3library.R
 import com.example.testpaging3library.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -23,7 +27,7 @@ class HomeFragment : Fragment() {
 
     @OptIn(ExperimentalPagingApi::class)
     private val viewModel: HomeViewModel by viewModels()
-
+    private val mAdapter = RecyclerViewAdapter()
 
     @OptIn(ExperimentalPagingApi::class)
     override fun onCreateView(
@@ -32,8 +36,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-
-        val v = viewModel
         binding.lifecycleOwner = this
         //binding.viewModel = viewModel
 
@@ -42,12 +44,29 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        init()
+
+
+        //viewModel.
+    }
+
+    @OptIn(ExperimentalPagingApi::class)
+    private fun init()
+    {
+        binding.homeRecyclerView.adapter = mAdapter
         binding.homeFloatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_navigation_search)
         }
 
-        //viewModel.
+        lifecycleScope.launch {
+            viewModel.getAllImages.collectLatest {
+                //Log.d("Kerolos", "init: ${it.}")
+                mAdapter.submitData(it)
+            }
+        }
+
     }
+
 
 
 }

@@ -6,10 +6,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.ExperimentalPagingApi
+import androidx.paging.cachedIn
+import androidx.paging.filter
 import androidx.paging.map
 import com.example.testpaging3library.data.repository.Repository
 import com.example.testpaging3library.data.repository.TestRepo
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,17 +23,5 @@ class HomeViewModel @Inject constructor(
 )
 : ViewModel() {
 
-    init {
-        Log.d("Kerolos", repository.getString())
-
-        viewModelScope.launch {
-            repository.getAllImages().collect{
-                Log.d("Kerolos", "${it.map {
-                    it.description.let {
-                        Log.d("Kerolos", "$it ")
-                    }
-                }}")
-            }
-        }
-    }
+    val getAllImages = repository.getAllImages().cachedIn(viewModelScope)
 }

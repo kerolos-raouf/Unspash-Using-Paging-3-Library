@@ -1,9 +1,11 @@
 package com.example.testpaging3library.data.repository
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.example.testpaging3library.BuildConfig
 import com.example.testpaging3library.data.database.UnsplashDatabase
 import com.example.testpaging3library.data.model.UnsplashImage
 import com.example.testpaging3library.data.network.UnsplashApi
@@ -20,6 +22,7 @@ class Repository @Inject constructor(
 
     fun getAllImages() : Flow<PagingData<UnsplashImage>>
     {
+        //Log.d("Kerolos", "getAllImages: ${BuildConfig.API_KEY}")
         val pagingSourceFactory = {
             unsplashDatabase.unsplashImageDao().getAllImages()
         }

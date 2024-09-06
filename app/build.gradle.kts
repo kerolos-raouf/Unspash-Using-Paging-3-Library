@@ -132,6 +132,9 @@ dependencies {
     ///Kotlin Coroutines Dependency
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.androidx.lifecycle.livedata.ktx.v270)//////lifeData with flow
+
+    ///shimmer effect
+    implementation("com.facebook.shimmer:shimmer:0.1.0@aar")
 }
 
 

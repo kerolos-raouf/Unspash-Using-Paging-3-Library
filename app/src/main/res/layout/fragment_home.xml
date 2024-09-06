@@ -12,25 +12,39 @@
         android:layout_height="match_parent"
         tools:context=".ui.home.HomeFragment">
 
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerFrameLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <include layout="@layout/shimmer_effect_layout" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/homeRecyclerView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            tools:listitem="@layout/recycler_view_item"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="vertical"
+            android:visibility="gone"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/recycler_view_item" />
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/homeFloatingActionButton"
+            style="@style/CustomFloatingActionButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            style="@style/CustomFloatingActionButton"
             android:contentDescription="search"
             android:src="@drawable/icon_search"
             app:layout_constraintBottom_toBottomOf="parent"

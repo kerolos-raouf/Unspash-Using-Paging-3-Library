@@ -51,6 +51,7 @@ class HomeFragment : Fragment() {
     @OptIn(ExperimentalPagingApi::class)
     private fun init()
     {
+        binding.shimmerFrameLayout.startShimmerAnimation()
         binding.homeRecyclerView.adapter = mAdapter
         binding.homeFloatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_navigation_search)
@@ -59,6 +60,9 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.getAllImages.collectLatest {
                 //Log.d("Kerolos", "init: ${it.}")
+                binding.shimmerFrameLayout.stopShimmerAnimation()
+                binding.shimmerFrameLayout.visibility = View.GONE
+                binding.homeRecyclerView.visibility = View.VISIBLE
                 mAdapter.submitData(it)
             }
         }

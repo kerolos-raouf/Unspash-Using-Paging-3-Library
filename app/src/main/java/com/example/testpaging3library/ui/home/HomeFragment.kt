@@ -27,7 +27,12 @@ class HomeFragment : Fragment() {
 
     @OptIn(ExperimentalPagingApi::class)
     private val viewModel: HomeViewModel by viewModels()
-    private val mAdapter = RecyclerViewAdapter()
+    private val mAdapter = RecyclerViewAdapter(object : RecyclerViewListener {
+        override fun stopShimmerEffect() {
+            stopShimmerAndShowRecyclerView()
+        }
+
+    })
 
     @OptIn(ExperimentalPagingApi::class)
     override fun onCreateView(
@@ -51,22 +56,23 @@ class HomeFragment : Fragment() {
     @OptIn(ExperimentalPagingApi::class)
     private fun init()
     {
-        binding.shimmerFrameLayout.startShimmerAnimation()
+        binding.shimmerFrameLayout.startShimmer()
         binding.homeRecyclerView.adapter = mAdapter
         binding.homeFloatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_navigation_search)
         }
 
         lifecycleScope.launch {
-            viewModel.getAllImages.collectLatest {
-                //Log.d("Kerolos", "init: ${it.}")
-                binding.shimmerFrameLayout.stopShimmerAnimation()
-                binding.shimmerFrameLayout.visibility = View.GONE
-                binding.homeRecyclerView.visibility = View.VISIBLE
+            viewModel.getAllImages.collectLatest { it ->
                 mAdapter.submitData(it)
             }
         }
+    }
 
+    fun stopShimmerAndShowRecyclerView()
+    {
+        binding.shimmerFrameLayout.stopShimmer()
+        binding.shimmerFrameLayout.visibility = View.GONE
     }
 
 

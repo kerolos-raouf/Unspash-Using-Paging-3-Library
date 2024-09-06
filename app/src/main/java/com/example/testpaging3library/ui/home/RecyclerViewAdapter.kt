@@ -11,8 +11,11 @@ import com.bumptech.glide.Glide
 import com.example.testpaging3library.data.model.UnsplashImage
 import com.example.testpaging3library.databinding.RecyclerViewItemBinding
 
-class RecyclerViewAdapter() : PagingDataAdapter<UnsplashImage,ViewHolder>(diffCallback)
+class RecyclerViewAdapter(
+    private val listener : RecyclerViewListener
+) : PagingDataAdapter<UnsplashImage,ViewHolder>(diffCallback)
 {
+
 
 
     companion object
@@ -35,6 +38,8 @@ class RecyclerViewAdapter() : PagingDataAdapter<UnsplashImage,ViewHolder>(diffCa
         Log.d("Kerolos", "bind: $position")
         if(image != null)
         {
+            listener.stopShimmerEffect()
+
             Log.d("Kerolos", "bind: ${image.urls.regular}")
             holder.bind(image)
         }

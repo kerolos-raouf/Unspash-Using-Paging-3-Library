@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.testpaging3library.databinding.FragmentSearchBinding
 import com.example.testpaging3library.ui.home.RecyclerViewAdapter
+import com.example.testpaging3library.ui.home.RecyclerViewListener
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -50,7 +51,12 @@ class SearchFragment : Fragment() {
 
     private fun init()
     {
-        mAdapter = RecyclerViewAdapter()
+        mAdapter = RecyclerViewAdapter(object : RecyclerViewListener {
+            override fun stopShimmerEffect() {
+
+            }
+
+        })
     }
 
     private fun setUp()

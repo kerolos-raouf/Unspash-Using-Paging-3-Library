@@ -1,7 +1,8 @@
-package com.example.testpaging3library.data.di
+package com.example.testpaging3library.di
 
 
 import com.example.testpaging3library.data.network.UnsplashApi
+import com.example.testpaging3library.util.Constants
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
@@ -34,7 +35,7 @@ object NetworkModule {
     {
         val json = Json { ignoreUnknownKeys = true }
         return Retrofit.Builder()
-            .baseUrl("https://api.unsplash.com/")
+            .baseUrl(Constants.BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
             .build()

@@ -46,8 +46,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
 
-
-        //viewModel.
     }
 
     @OptIn(ExperimentalPagingApi::class)

@@ -10,6 +10,7 @@ import com.example.testpaging3library.data.database.UnsplashDatabase
 import com.example.testpaging3library.data.model.UnsplashImage
 import com.example.testpaging3library.data.model.UnsplashImageKeys
 import com.example.testpaging3library.data.network.UnsplashApi
+import com.example.testpaging3library.util.Constants
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
@@ -48,7 +49,7 @@ class UnsplashRemoteMediator @Inject constructor(
                  }
              }
 
-             val response  = unsplashApi.getAllImages(currentPage,10)
+             val response  = unsplashApi.getAllImages(currentPage,Constants.IMAGES_PER_PAGE)
 
              val endOfPaginationReached = response.isEmpty()
 
